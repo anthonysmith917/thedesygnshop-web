@@ -1,0 +1,37 @@
+name: Sync new Wix drops
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Scan only; do not update the homepage"
+        required: false
+        default: true
+        type: boolean
+  schedule:
+    - cron: "17 */6 * * *"
+permissions:
+  contents: write
+jobs:
+  scan-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node --test scripts/sync-wix-products.test.mjs
+      - name: Scan Wix
+        env:
+          WIX_STORE_URL: https://cmdesygns6.wixsite.com/the-desygn-shop-2
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then
+            node scripts/sync-wix-products.mjs --dry-run
+          else
+            node scripts/sync-wix-products.mjs
+          fi
+      - name: Publish new drops
+        if: ${{ github.event_name == 'schedule' || inputs.dry_run == false }}
+        run: |
+          if git diff --quiet -- index.html; then echo "No new products."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Auto-add new Wix product drop"
+          git push
