@@ -38,9 +38,12 @@ jobs:
       - name: Publish new drops
         if: ${{ github.event_name == 'schedule' || inputs.dry_run == false }}
         run: |
-          if git diff --quiet -- index.html; then echo "No new products."; exit 0; fi
+          if git diff --quiet -- index.html .wix-catalog-state.json; then
+            echo "No catalog changes."
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]"
-          git add index.html
-          git commit -m "New drops"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .wix-catalog-state.json
+          git commit -m "Sync Wix catalog state and new drops"
           git push
