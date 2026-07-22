@@ -9,14 +9,22 @@ on:
         type: boolean
   schedule:
     - cron: "17 */6 * * *"
+
 permissions:
   contents: write
+
 jobs:
   scan-and-sync:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
       - run: node --test scripts/sync-wix-products.test.mjs
+
       - name: Scan Wix
         env:
           WIX_STORE_URL: https://cmdesygns6.wixsite.com/the-desygn-shop-2
@@ -26,12 +34,13 @@ jobs:
           else
             node scripts/sync-wix-products.mjs
           fi
+
       - name: Publish new drops
         if: ${{ github.event_name == 'schedule' || inputs.dry_run == false }}
         run: |
           if git diff --quiet -- index.html; then echo "No new products."; exit 0; fi
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html .wix-catalog-state.json
-          git commit -m "Auto-add new Wix product drop"
+          git config user.email "41898282+github-actions[bot]"
+          git add index.html
+          git commit -m "New drops"
           git push
