@@ -67,7 +67,6 @@ if (webPromo && !document.querySelector('.printing-home-feature')) {
     @media(max-width:560px){.printing-home-card{padding:26px}.printing-home-products{grid-template-columns:1fr}.printing-home-products a{min-height:120px}}
   `;
   document.head.appendChild(style);
-  document.querySelectorAll('.printing-home-feature .reveal').forEach((element) => observer.observe(element));
 }
 
 const filters = document.querySelectorAll('.filter');
