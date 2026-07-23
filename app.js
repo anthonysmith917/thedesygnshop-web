@@ -43,9 +43,9 @@ if (webPromo && !document.querySelector('.printing-home-feature')) {
         </div>
       </div>
       <div class="printing-home-products" aria-label="Popular printing categories">
-        <a href="product.html?product=business-cards"><strong>Business Cards</strong><span>Premium stocks &amp; finishes</span></a>
-        <a href="product.html?product=flyers"><strong>Flyers</strong><span>Promote events and offers</span></a>
-        <a href="product.html?product=brochures"><strong>Brochures</strong><span>Tell the full brand story</span></a>
+        <a href="print-product.html?product=business-cards"><strong>Business Cards</strong><span>Premium stocks &amp; finishes</span></a>
+        <a href="print-product.html?product=flyers"><strong>Flyers</strong><span>Promote events and offers</span></a>
+        <a href="print-product.html?product=brochures"><strong>Brochures</strong><span>Tell the full brand story</span></a>
         <a href="print-products.html"><strong>Signs &amp; More</strong><span>Browse the complete catalog</span></a>
       </div>
     </div>`;
