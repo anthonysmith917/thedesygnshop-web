@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
-const STORE = "https://cmdesygns6.wixsite.com/the-desygn-shop-2";
+const STORE = "https://shop.thedesygnshop.com";
 const STATE = ".wix-catalog-state.json";
 const START = "<!-- AUTO-WIX-PRODUCTS:START -->";
 const END = "<!-- AUTO-WIX-PRODUCTS:END -->";
