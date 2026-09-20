@@ -89,6 +89,18 @@ button { font: inherit; }
 .marquee b { color: var(--gold); }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
+.rankless-promo { position: relative; min-height: clamp(520px, 70vw, 760px); display: flex; align-items: flex-end; overflow: hidden; padding: clamp(54px, 8vw, 100px) clamp(24px, 7vw, 110px); color: #fff; background: #09090d; isolation: isolate; }
+.rankless-promo-media { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.rankless-promo-shade { position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, rgba(4,5,9,.95) 0%, rgba(4,5,9,.67) 48%, rgba(4,5,9,.18) 100%), linear-gradient(0deg, rgba(4,5,9,.86), transparent 60%); }
+.rankless-promo-copy { max-width: 760px; }
+.rankless-promo-copy p { margin: 0 0 12px; color: var(--gold); font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.rankless-promo h2 { margin: 0; font-family: "Manrope", sans-serif; font-size: clamp(70px, 11vw, 158px); line-height: .82; letter-spacing: 0; }
+.rankless-promo strong { display: block; margin: 28px 0 32px; font-size: clamp(20px, 2.4vw, 34px); line-height: 1.15; }
+.rankless-promo-button { color: #fff; background: var(--red); box-shadow: 0 14px 38px rgba(177,29,30,.34); }
+.rankless-promo-button:hover { background: #cf2627; }
+.rankless-promo-button span { margin-left: 12px; }
+
+
 .section { padding: clamp(78px, 9vw, 145px) clamp(24px, 7vw, 110px); }
 
 .web-promo { padding-top: clamp(58px, 7vw, 95px); padding-bottom: clamp(58px, 7vw, 95px); background: #fff; }
@@ -240,6 +252,9 @@ button { font: inherit; }
 }
 
 @media (max-width: 760px) {
+  .rankless-promo { min-height: 600px; align-items: flex-end; }
+  .rankless-promo-media { object-position: 60% center; }
+  .rankless-promo-shade { background: linear-gradient(0deg, rgba(4,5,9,.98) 0%, rgba(4,5,9,.52) 68%, rgba(4,5,9,.16) 100%); }
   .announcement { gap: 9px; font-size: 8px; }
   .site-header { min-height: 72px; grid-template-columns: 1fr auto; }
   .brand { width: 76px; height: 58px; }
