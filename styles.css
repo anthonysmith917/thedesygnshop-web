@@ -89,8 +89,8 @@ button { font: inherit; }
 .marquee b { color: var(--gold); }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
-.rankless-promo { position: relative; min-height: clamp(520px, 70vw, 760px); display: flex; align-items: flex-end; overflow: hidden; padding: clamp(54px, 8vw, 100px) clamp(24px, 7vw, 110px); color: #fff; background: #09090d url('https://rankless.thedesygnshop.com/assets/rankless-main-cast.webp') center 12% / cover no-repeat; isolation: isolate; }
-.rankless-promo::before { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(180deg, rgba(4,5,9,.18) 0%, rgba(4,5,9,.62) 52%, rgba(4,5,9,.94) 100%); pointer-events: none; }
+.rankless-promo { position: relative; min-height: clamp(520px, 70vw, 760px); display: flex; align-items: flex-end; overflow: hidden; padding: clamp(54px, 8vw, 100px) clamp(24px, 7vw, 110px); color: #fff; background: #09090d url('assets/wide_dark_dramatic_anime_style_banner_background.png') center top / cover no-repeat; isolation: isolate; }
+.rankless-promo::before { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(180deg, rgba(4,5,9,.28) 0%, rgba(4,5,9,.55) 52%, rgba(4,5,9,.92) 100%); pointer-events: none; }
 .rankless-promo-media { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: .32; }
 .rankless-promo-shade { position: absolute; inset: 0; z-index: 0; background: linear-gradient(90deg, rgba(4,5,9,.95) 0%, rgba(4,5,9,.67) 48%, rgba(4,5,9,.18) 100%), linear-gradient(0deg, rgba(4,5,9,.86), transparent 60%); }
 .rankless-promo-copy { position: relative; z-index: 1; max-width: 760px; }
