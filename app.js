@@ -1,6 +1,12 @@
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.site-nav');
 
+const closeMenu = () => {
+  navigation?.classList.remove('open');
+  menuButton?.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('menu-open');
+};
+
 // Keep the new Printing section visible in the primary navigation.
 if (navigation && !navigation.querySelector('a[href="print-products.html"]')) {
   const printingLink = document.createElement('a');
@@ -13,16 +19,20 @@ if (navigation && !navigation.querySelector('a[href="print-products.html"]')) {
 menuButton?.addEventListener('click', () => {
   const open = menuButton.getAttribute('aria-expanded') === 'true';
   menuButton.setAttribute('aria-expanded', String(!open));
-  navigation.classList.toggle('open', !open);
+  navigation?.classList.toggle('open', !open);
   document.body.classList.toggle('menu-open', !open);
 });
 
 navigation?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    navigation.classList.remove('open');
-    menuButton?.setAttribute('aria-expanded', 'false');
-    document.body.classList.remove('menu-open');
-  });
+  link.addEventListener('click', closeMenu);
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeMenu();
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 760) closeMenu();
 });
 
 // Add a polished homepage entry point for Printing & Marketing.
