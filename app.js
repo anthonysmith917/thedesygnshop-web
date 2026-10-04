@@ -1,3 +1,4 @@
+(() => {
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.site-nav');
 
@@ -6,15 +7,6 @@ const closeMenu = () => {
   menuButton?.setAttribute('aria-expanded', 'false');
   document.body.classList.remove('menu-open');
 };
-
-// Keep the new Printing section visible in the primary navigation.
-if (navigation && !navigation.querySelector('a[href="print-products.html"]')) {
-  const printingLink = document.createElement('a');
-  printingLink.href = 'print-products.html';
-  printingLink.textContent = 'Printing';
-  const servicesLink = navigation.querySelector('a[href="services.html"]');
-  navigation.insertBefore(printingLink, servicesLink || navigation.firstChild);
-}
 
 menuButton?.addEventListener('click', () => {
   const open = menuButton.getAttribute('aria-expanded') === 'true';
@@ -106,3 +98,5 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
+
+})();

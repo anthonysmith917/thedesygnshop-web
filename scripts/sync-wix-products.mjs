@@ -58,27 +58,18 @@ async function discover(base) {
   return [...products.values()];
 }
 
-export async function sync({ indexPath = "index.html", statePath = STATE, storeUrl = STORE, dryRun = false } = {}) {
+export async function sync({ indexPath = "catalog.html", statePath = STATE, storeUrl = STORE, dryRun = false } = {}) {
   const html = await readFile(indexPath, "utf8");
-  const state = JSON.parse(await readFile(statePath, "utf8"));
-  if (!html.includes(START) || !html.includes(END)) throw new Error("Homepage auto-product markers are missing.");
+  if (!html.includes(START) || !html.includes(END)) throw new Error("Catalog auto-product markers are missing.");
   const urls = await discover(storeUrl);
   const slugs = urls.map(productSlug).filter(Boolean);
-  if (!state.initialized) {
-    if (dryRun) console.log("Dry-run baseline: found " + slugs.length + " existing Wix products; no cards will be added.");
-    else {
-      await writeFile(statePath, JSON.stringify({ initialized: true, slugs, scannedAt: new Date().toISOString() }, null, 2) + "\n");
-      console.log("Baseline saved for " + slugs.length + " existing products. Future new drops will be added.");
-    }
-    return;
-  }
-  const previous = new Set(state.slugs);
-  const homepage = new Set([...html.matchAll(/\/product-page\/([^"'?#/]+)/gi)].map((m) => m[1].toLowerCase()));
-  const newUrls = urls.filter((url) => !previous.has(productSlug(url)) && !homepage.has(productSlug(url)));
+  const catalog = new Set([...html.matchAll(/\/product-page\/([^"'?#/]+)/gi)].map((m) => m[1].toLowerCase()));
+  const newUrls = urls.filter((url) => !catalog.has(productSlug(url)));
   const fresh = [];
   for (const url of newUrls) {
     const product = extractProduct(await get(url), url);
-    if (product?.slug && product?.image) fresh.push(product);
+    if (!product?.slug || !product?.image) throw new Error("Missing product metadata: " + url);
+    fresh.push(product);
   }
   if (dryRun) {
     console.log(fresh.length ? "Would add: " + fresh.map((p) => p.name).join(", ") : "No new drops. " + urls.length + " products scanned.");

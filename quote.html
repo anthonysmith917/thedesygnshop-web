@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Instant Quote Calculator — The Desygn Shop</title>
 <meta name="description" content="Get an instant price estimate from The Desygn Shop — business cards, flyers, banners, apparel & more. See your price in seconds, compared against Vistaprint.">
-<style>
+<link rel="stylesheet" href="styles.css"><script defer src="app.js"></script><style>
 /* ============ BRAND VARIABLES (set from BRAND config in JS) ============ */
 :root{
   --primary:#b11d1e;
@@ -23,25 +23,6 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   background:var(--bg);color:var(--ink);line-height:1.55;
   -webkit-font-smoothing:antialiased;
-}
-/* ============ HEADER (mirrors thedesygnshop.com) ============ */
-.site-header{position:sticky;top:0;z-index:100;min-height:82px;display:grid;
-  grid-template-columns:190px 1fr 190px;align-items:center;gap:26px;
-  padding:8px clamp(24px,5vw,76px);background:rgba(245,243,237,.92);
-  border-bottom:1px solid var(--line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.brand{justify-self:start;width:88px;height:66px;display:grid;place-items:center}
-.brand img{max-height:72px;width:auto}
-.site-nav{display:flex;justify-content:center;gap:clamp(18px,3vw,42px);font-size:14px;font-weight:600}
-.site-nav a{position:relative;padding:12px 0;color:var(--ink);text-decoration:none}
-.site-nav a::after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:2px;background:var(--primary);transition:right .25s ease}
-.site-nav a:hover::after{right:0}
-.header-shop{justify-self:end;padding:13px 18px;color:#fff;background:var(--accent);border-radius:999px;
-  font-size:13px;font-weight:700;text-decoration:none;transition:transform .2s ease,background .2s ease;white-space:nowrap}
-.header-shop:hover{transform:translateY(-2px);background:var(--ink);color:#fff}
-@media(max-width:900px){
-  .site-header{grid-template-columns:auto auto;padding-inline:20px;gap:12px}
-  .site-nav{display:none}
-  .brand{width:64px;height:52px}.brand img{max-height:54px}
 }
 /* ============ PAGE TITLE ============ */
 .page-title{max-width:1180px;margin:0 auto;padding:40px 24px 8px}
@@ -192,10 +173,10 @@ body{
 
 <header class="site-header">
   <a class="brand" href="https://thedesygnshop.com/" aria-label="The Desygn Shop home"><img id="brandLogo" alt="The Desygn Shop"></a>
-  <nav class="site-nav" aria-label="Primary navigation">
-    <a href="https://thedesygnshop.com/#shop">Shop</a><a href="https://thedesygnshop.com/services.html">Services</a><a href="https://thedesygnshop.com/#process">Custom Orders</a><a href="https://thedesygnshop.com/about.html">About</a><a href="https://thedesygnshop.com/contact.html">Contact</a>
-  </nav>
-  <a class="header-shop" href="https://shop.thedesygnshop.com">Visit Store <span aria-hidden="true">↗</span></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><span class="sr-only">Menu</span></button><nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+      <a href="catalog.html">Shop</a><a href="index.html#studio">Create a Tee</a><a href="print-products.html">Custom Printing</a><a href="services.html#graphic-design">Graphic Design</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+    </nav>
+  <a class="header-shop" href="catalog.html">Shop All Designs <span aria-hidden="true">↗</span></a>
 </header>
 
 <div class="page-title">
@@ -265,7 +246,7 @@ body{
   <div class="footer-brand"><img id="footerLogo" alt="The Desygn Shop"><p>Graphic design, custom apparel, personalized products, and professional printing.</p></div>
   <div><h3>Explore</h3><a href="https://thedesygnshop.com/">Home</a><a href="https://thedesygnshop.com/services.html">Services</a><a href="https://thedesygnshop.com/about.html">About us</a></div>
   <div><h3>Help</h3><a href="https://thedesygnshop.com/faq.html">FAQ</a><a href="https://thedesygnshop.com/shipping-returns.html">Shipping &amp; returns</a><a href="https://thedesygnshop.com/contact.html">Contact us</a></div>
-  <div><h3>Legal &amp; store</h3><a href="https://thedesygnshop.com/privacy.html">Privacy policy</a><a href="https://shop.thedesygnshop.com">Shop products ↗</a></div>
+  <div><h3>Legal &amp; store</h3><a href="https://thedesygnshop.com/privacy.html">Privacy policy</a><a href="catalog.html">Shop All Designs</a></div>
   <div class="footer-bottom"><span>© <span data-year></span> The Desygn Shop. All rights reserved.</span><span><a href="#top" id="toTop">Back to top ↑</a> &middot; <a id="adminToggle">Admin</a></span></div>
   <div id="adminPanel">
     <h4>Lead Capture Admin</h4>

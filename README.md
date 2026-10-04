@@ -22,3 +22,13 @@ Static GitHub Pages frontend for The Desygn Shop. The site uses the official bra
 `https://cmdesygns6.wixsite.com/the-desygn-shop`
 
 All product cards use exact Wix product URLs retrieved from the Wix Stores V3 catalog on July 20, 2026.
+
+## Homepage and catalog transition
+
+The homepage presents the Tee Studio followed by six curated Featured Drops, brand context, services, preserved website and Rankless promotions, and a studio reminder. `catalog.html` contains all 26 current apparel designs and supports collection/name search. The separate printing catalog remains at `print-products.html`.
+
+Product cards retain their current product IDs, images, prices, and checkout URLs. Run `node scripts/sync-wix-products.mjs` to discover and backfill missing Wix products into **catalog.html only**; new products never expand the homepage grid. Run with `--dry-run` to inspect changes first. The sync preserves existing cards and fails without writing if a new product cannot be read.
+
+For the next commerce provider, update catalog product purchase links and images (or replace the catalog renderer), then update the six curated homepage cards. The homepage structure and its catalog navigation do not depend on Wix. Keep the Wix sync disabled once Wix stops being the catalog source.
+
+The Custom Tee Studio currently points to the existing Railway app. Its Stripe test-mode notice must remain until real customer checkout is verified. GitHub Actions deploys pushes to `main` using `.github/workflows/pages.yml`; `CNAME` retains the custom domain.
