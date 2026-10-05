@@ -455,3 +455,4 @@ button { font: inherit; }
   .process-line { gap: 35px; }
   .service-cta-card { border-radius: 24px; }
 }
+@media(min-width:761px) and (max-width:1350px){.site-nav{font-size:12px;gap:12px}}
