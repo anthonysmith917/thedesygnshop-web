@@ -10,7 +10,14 @@ function render(){
   grid.replaceChildren();
   const query=search.value.trim().toLowerCase();
   const shown=products.filter(p=>(p.name+' '+p.school).toLowerCase().includes(query)&&(!schoolFilter.value||p.school===schoolFilter.value));
-  for(const p of shown){
+  for(const school of [...new Set(shown.map(p=>p.school))].sort()){
+    const section=el('section');section.className='school-collection-group';section.append(el('h2',school));
+    for(const category of ['Youth','Adult']){
+      const members=shown.filter(p=>p.school===school&&sizeGroup(p)===category);if(!members.length)continue;
+      const subgroup=el('section');subgroup.className='school-age-group';
+      subgroup.append(el('h3',category==='Youth'?'Little Jags':'Adult Tees'),el('p',category==='Youth'?'Youth shirts · '+members.length+' designs':'Bella + Canvas 3001 · Adult S-3XL · '+members.length+' designs'));
+      const cards=el('div');cards.className='product-grid';
+      for(const p of members){
     const card=el('article');card.className='product-card';
     const visual=el('div');visual.className='school-art';
     if(p.image){const img=el('img');img.src=p.image;img.alt=p.name;img.loading='lazy';visual.append(img);}
@@ -24,8 +31,13 @@ function render(){
     if(p.variants?.length){
       const sizes=[...new Set(p.variants.map(v=>v.size).filter(Boolean))].sort((a,b)=>(sizeOrder.includes(a)?sizeOrder.indexOf(a):99)-(sizeOrder.includes(b)?sizeOrder.indexOf(b):99)||a.localeCompare(b));
       info.append(el('p',sizeGroup(p)+' sizes: '+sizes.join(' · ')));
+      info.append(el('p','Colors: '+[...new Set(p.variants.map(v=>v.color).filter(Boolean))].join(' · ')));
     }
-    card.append(visual,info);grid.append(card);
+    card.append(visual,info);cards.append(card);
+      }
+      subgroup.append(cards);section.append(subgroup);
+    }
+    grid.append(section);
   }
   document.querySelector('#school-count').textContent=`${shown.length} school designs`;
 }
