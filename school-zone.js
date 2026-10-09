@@ -15,7 +15,7 @@ function render(){
     for(const category of ['Youth','Adult']){
       const members=shown.filter(p=>p.school===school&&sizeGroup(p)===category);if(!members.length)continue;
       const subgroup=el('section');subgroup.className='school-age-group';
-      subgroup.append(el('h3',category==='Youth'?'Little Jags':'Adult Tees'),el('p',category==='Youth'?'Youth shirts · '+members.length+' designs':'Bella + Canvas 3001 · Adult S-3XL · '+members.length+' designs'));
+      subgroup.append(el('h3',members[0].group||(category==='Youth'?'Youth Tees':'Adult Tees')),el('p',category==='Youth'?'Youth shirts · '+members.length+' designs':'Bella + Canvas 3001 · Adult S-3XL · '+members.length+' designs'));
       const cards=el('div');cards.className='product-grid';
       for(const p of members){
     const card=el('article');card.className='product-card';
