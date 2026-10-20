@@ -46,7 +46,8 @@ search.addEventListener('input',render);schoolFilter.addEventListener('change',r
   try{
     const response=await fetch('https://lab.thedesygnshop.com/api/school-zone');const data=await response.json();
     if(!response.ok)throw Error(data.error);
-    products=data.products;
+    const excludedProductIds=new Set([483296392,483296395,483296404]);
+    products=data.products.filter(product=>!excludedProductIds.has(Number(product.id)));
     status.textContent='Choose a design to see available colors and sizes. Stripe checkout is currently in test mode; real payments are not enabled.';
   }catch{
     const names=['Circle Cub','Slash Cub','Stars Cub','Shield Jags','Paw Splatter Cub','Cub Banner','Claw Slash Pride','Jags Today, Leaders Tomorrow','DC Cub Letters','Jags Paw Blast'];
