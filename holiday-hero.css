@@ -1,0 +1,49 @@
+.holiday-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: clamp(520px, 46vw, 740px);
+  padding: clamp(48px, 7vw, 100px) clamp(24px, 7vw, 110px);
+  overflow: hidden;
+  background: #191713;
+  color: #fff;
+}
+.holiday-hero::before { content: none; }
+.holiday-hero--catalog { min-height: clamp(410px, 40vw, 640px); }
+.holiday-hero-photo {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 0 auto;
+  width: 74%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 29%;
+  mask-image: linear-gradient(to right, transparent, #000 54%);
+}
+.holiday-hero .hero-copy { max-width: min(48%, 620px); }
+.holiday-hero h1 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(45px, 6vw, 88px);
+  line-height: 1;
+  letter-spacing: -.055em;
+}
+.holiday-hero h1 em { color: #f5cd90; }
+.holiday-hero .hero-lede { color: #f2e9dd; }
+@media (max-width: 760px) {
+  .holiday-hero {
+    align-items: flex-end;
+    min-height: 0;
+    padding: clamp(245px, 76vw, 500px) 24px 40px;
+  }
+  .holiday-hero-photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    inset: 0 0 auto;
+    mask-image: linear-gradient(to bottom, #000 79%, transparent);
+  }
+  .holiday-hero .hero-copy { max-width: 100%; }
+  .holiday-hero .hero-proof { margin-top: 28px; }
+}
